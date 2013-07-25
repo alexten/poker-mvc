@@ -1,0 +1,563 @@
+<!DOCTYPE html> 
+<html> 
+<head> 
+	<title>pumpTracker</title>
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.css" />
+
+	<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+	<script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.js"></script>
+
+
+	<script src="main.js"></script>
+
+	<style>
+		.micro { font-size: 0.5em; }
+		.small { font-size: 0.75em; }
+		.smallish { font-size: 0.85em; }
+		.big { font-size: 1.2em; }
+
+		.containing-element .ui-slider-switch { width: 11em; }
+
+		.hide { visibility:hidden; display:none; }
+	</style>
+
+
+</head> 
+
+<body> 
+
+<!-- Start of menu -->
+<div data-role="page" id="menu">
+
+	<div data-role="header">
+		<h1>Poker Logger</h1>
+	</div><!-- /header -->
+
+	<div data-role="content">
+		<br>
+
+		<div class="ui-grid-b">
+			<div class="ui-block-a"></div>
+			<div class="ui-block-b"><input type="datetime" id='datetime' placeholder='Date' style='width: 15em;'></div>
+			<div class="ui-block-c"></div>
+		</div>
+
+		<br>
+
+		<div data-role="collapsible-set" data-content-theme="d" data-collapsed-icon="arrow-d" data-expanded-icon="delete">
+		    <div data-role="collapsible" data-theme="e">
+		        <h3>Cash Games</h3>
+		        <p></p>
+
+		        <div class="ui-grid-a">
+				    <div class="ui-block-a"><div class="ui-bar ui-bar-d" style="height:60px"><div data-role="rangeslider" data-track-theme="d" data-theme="a" data-mini="true">
+			        <label for="range-3a">Small/Big Blinds:</label>
+			        <input type="range" name="range-3a" id="range-3a" min="0.25" max="5" step=".25" value="0.25">
+			        <input type="range" name="range-3b" id="range-3b" min="0.50" max="5" step=".25" value="0.50">
+			    </div></div></div>
+				    <div class="ui-block-b"><div class="ui-bar ui-bar-d" style="height:60px"><label for="max-buy-in">Max Buy-In:</label>
+					<input type="range" name="max-buy-in" id="max-buy-in" step="5" value="20" min="20" max="1000" data-mini="true" data-highlight="true" data-theme="b" data-track-theme="d"></div></div>
+				</div>
+
+		        
+		        <div class="ui-grid-a">
+				    <div class="ui-block-a"><div class="ui-bar ui-bar-c" style="height:60px"><label for="buy-in">Initial Buy-In:</label>
+					<input type="range" name="buy-in" id="buy-in" value="20" min="20" max="1000" data-mini="true" data-highlight="true" data-theme="b" data-track-theme="d"></div></div>
+				    <div class="ui-block-b"><div class="ui-bar ui-bar-c" style="height:60px"><label for="rebuys">Rebuys:</label>
+					<input type="range" name="rebuys" id="rebuys" value="20" min="20" max="1000" data-mini="true" data-highlight="true" data-theme="b" data-track-theme="d"></div></div>
+				</div>
+
+
+
+		        <div class="ui-grid-a">
+				    <div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px"><label for="buy-in">Number of Players:</label>
+					<input type="range" name="number_of_players" id="number_of_players" value="9" min="2" max="10" data-mini="true" data-highlight="true" data-theme="b" data-track-theme="d"></div></div>
+				    <div class="ui-block-b"><div class="ui-bar ui-bar-e" style="height:60px"><label for="buy-in">Cash Out:</label>
+					<input type="range" name="results" id="results" value="0" min="0" max="1000" data-mini="true" data-highlight="true" data-theme="b" data-track-theme="d"></div></div>
+				</div>			    
+
+
+			    
+
+			    
+
+		    </div>
+		    <div data-role="collapsible" data-theme="a">
+		        <h3>Tourneys</h3>
+		        <p>I'm the collapsible content for section 2</p>
+		    </div>
+		    <div data-role="collapsible" data-theme="b"  data-collapsed-icon="arrow-r">
+		        <h3>Result Analysis</h3>
+		        <p>I'm the collapsible content for section 3</p>
+		    </div>
+		</div>
+
+
+
+	</div><!-- /content -->
+</div><!-- /page -->
+
+
+
+
+
+<!-- Start of Bench page -->
+<div data-role="page" id="bench">
+<form id='bp_form' action='/cgi/pumpTracker.php' method=POST>
+<input type=hidden name=ex value='bp' />
+<input type=hidden name=datetime id='bp_datetime'>
+<input type=hidden name='self_weight' id="bp_sw">
+
+	<div data-role="header" data-theme="c">
+		<h1>Bench press</h1>
+	</div><!-- /header -->
+
+	<div data-role="content">
+
+		<div class="ui-grid-solo small" style="width: 92%">
+				<input type="checkbox" name="warmup" id="checkbox-mini-0" class="custom" data-mini="true" data-theme="e" />
+				<label for="checkbox-mini-0">Warm-up</label>
+		</div>
+
+		<br>
+
+		<div class="ui-grid-a small">
+			<div class="ui-block-a"><input type=number name=set1_reps value='' style="width:85%;" placeholder="Set#1, Reps" data-mini="true" /></div>
+			<div class="ui-block-b"><input type=number name=set1_weights value='' style="width:85%;" placeholder="Set#1, Weights" data-mini="true" /></div>
+		</div>
+
+
+		<div class="ui-grid-a small">
+			<div class="ui-block-a"><input type=number name=set2_reps value='' style="width:85%;" placeholder="Set#2, Reps" data-mini="true" /></div>
+			<div class="ui-block-b"><input type=number name=set2_weights value='' style="width:85%;" placeholder="Set#2, Weights" data-mini="true" /></div>
+		</div>
+
+
+		<div class="ui-grid-a small">
+			<div class="ui-block-a"><input type=number name=set3_reps value='' style="width:85%;" placeholder="Set#3, Reps" data-mini="true" /></div>
+			<div class="ui-block-b"><input type=number name=set3_weights value='' style="width:85%;" placeholder="Set#3, Weights" data-mini="true" /></div>
+		</div>
+
+
+		<div class="ui-grid-a small">
+			<div class="ui-block-a"><input type=number name=set4_reps value='' style="width:85%;" placeholder="Set#4, Reps" data-mini="true" /></div>
+			<div class="ui-block-b"><input type=number name=set4_weights value='' style="width:85%;" placeholder="Set#4, Weights" data-mini="true" /></div>
+		</div>
+
+
+		<div class="ui-grid-a small">
+			<div class="ui-block-a"><input type=number name=set5_reps value='' style="width:85%;" placeholder="Set#5, Reps" data-mini="true" /></div>
+			<div class="ui-block-b"><input type=number name=set5_weights value='' style="width:85%;" placeholder="Set#5, Weights" data-mini="true" /></div>
+		</div>
+
+
+		<div class="ui-grid-a small hide" id='bp_set_6'>
+			<div class="ui-block-a"><input type=number name=set6_reps value='' style="width:85%;" placeholder="Set#6, Reps" data-mini="true" /></div>
+			<div class="ui-block-b"><input type=number name=set6_weights value='' style="width:85%;" placeholder="Set#6, Weights" data-mini="true" /></div>
+		</div>
+
+
+		<div class="ui-grid-a small hide" id='bp_set_7'>
+			<div class="ui-block-a"><input type=number name=set7_reps value='' style="width:85%;" placeholder="Set#7, Reps" data-mini="true" /></div>
+			<div class="ui-block-b"><input type=number name=set7_weights value='' style="width:85%;" placeholder="Set#7, Weights" data-mini="true" /></div>
+		</div>
+
+
+		<div class="ui-grid-a small hide" id='bp_set_8'>
+			<div class="ui-block-a"><input type=number name=set8_reps value='' style="width:85%;" placeholder="Set#8, Reps" data-mini="true" /></div>
+			<div class="ui-block-b"><input type=number name=set8_weights value='' style="width:85%;" placeholder="Set#8, Weights" data-mini="true" /></div>
+		</div>
+
+
+		<div class="ui-grid-solo" id='bp_add_button_div'>
+			<div class="ui-block-a">
+				<a href="#" id='bp_add_button' data-role="button" data-icon="plus" data-mini="true">Add a set</a>
+			</div>
+		</div>
+
+		<br><br>
+
+		<div class="ui-grid-b">
+			<div class="ui-block-a"><a href="#menu" data-role="button" data-theme="b" data-mini="true" >Le Menu</a></div>
+			<div class="ui-block-b" style="width:28%;">&nbsp;</div>
+			<div class="ui-block-c" style="width:32%;" id='bp_submit'><button type="v" data-theme="a" data-mini="true" style="width:15%; padding:0px; margin-left:-10px;">Submit</button></div>
+		</div>
+
+
+	</div><!-- /content -->
+
+</form>
+</div>
+<!-- /page -->
+
+
+
+<!-- Start of Handcleans page -->
+<div data-role="page" id="handcleans">
+<form id='hc_form' action='/cgi/pumpTracker.php' method=POST>
+<input type=hidden name=ex value='hc'>
+<input type=hidden name=datetime id='hc_datetime'>
+<input type=hidden name='self_weight' id="hc_sw">
+
+	<div data-role="header" data-theme="b">
+		<h1>Hand Cleans</h1>
+	</div><!-- /header -->
+
+	<div data-role="content">
+
+		<div class="ui-grid-solo small" style="width: 92%">
+				<input type="checkbox" name="warmup" id="checkbox-mini-0" class="custom" data-mini="true" data-theme="e" />
+				<label for="checkbox-mini-0">Warm-up</label>
+		</div>
+
+
+		<br>
+
+		<div class="ui-grid-a small">
+			<div class="ui-block-a"><input type=number name=set1_reps value='' style="width:85%;" placeholder="Set#1, Reps" data-mini="true" /></div>
+			<div class="ui-block-b"><input type=number name=set1_weights value='' style="width:85%;" placeholder="Set#1, Weights" data-mini="true" /></div>
+		</div>
+
+
+		<div class="ui-grid-a small">
+			<div class="ui-block-a"><input type=number name=set2_reps value='' style="width:85%;" placeholder="Set#2, Reps" data-mini="true" /></div>
+			<div class="ui-block-b"><input type=number name=set2_weights value='' style="width:85%;" placeholder="Set#2, Weights" data-mini="true" /></div>
+		</div>
+
+
+		<div class="ui-grid-a small">
+			<div class="ui-block-a"><input type=number name=set3_reps value='' style="width:85%;" placeholder="Set#3, Reps" data-mini="true" /></div>
+			<div class="ui-block-b"><input type=number name=set3_weights value='' style="width:85%;" placeholder="Set#3, Weights" data-mini="true" /></div>
+		</div>
+
+
+		<div class="ui-grid-a small">
+			<div class="ui-block-a"><input type=number name=set4_reps value='' style="width:85%;" placeholder="Set#4, Reps" data-mini="true" /></div>
+			<div class="ui-block-b"><input type=number name=set4_weights value='' style="width:85%;" placeholder="Set#4, Weights" data-mini="true" /></div>
+		</div>
+
+
+		<div class="ui-grid-a small">
+			<div class="ui-block-a"><input type=number name=set5_reps value='' style="width:85%;" placeholder="Set#5, Reps" data-mini="true" /></div>
+			<div class="ui-block-b"><input type=number name=set5_weights value='' style="width:85%;" placeholder="Set#5, Weights" data-mini="true" /></div>
+		</div>
+
+
+		<div class="ui-grid-a small hide" id='hc_set_6'>
+			<div class="ui-block-a"><input type=number name=set6_reps value='' style="width:85%;" placeholder="Set#6, Reps" data-mini="true" /></div>
+			<div class="ui-block-b"><input type=number name=set6_weights value='' style="width:85%;" placeholder="Set#6, Weights" data-mini="true" /></div>
+		</div>
+
+
+		<div class="ui-grid-a small hide" id='hc_set_7'>
+			<div class="ui-block-a"><input type=number name=set7_reps value='' style="width:85%;" placeholder="Set#7, Reps" data-mini="true" /></div>
+			<div class="ui-block-b"><input type=number name=set7_weights value='' style="width:85%;" placeholder="Set#7, Weights" data-mini="true" /></div>
+		</div>
+
+
+		<div class="ui-grid-a small hide" id='hc_set_8'>
+			<div class="ui-block-a"><input type=number name=set8_reps value='' style="width:85%;" placeholder="Set#8, Reps" data-mini="true" /></div>
+			<div class="ui-block-b"><input type=number name=set8_weights value='' style="width:85%;" placeholder="Set#8, Weights" data-mini="true" /></div>
+		</div>
+
+
+		<div class="ui-grid-solo" id='hc_add_button_div'>
+			<div class="ui-block-a">
+				<a href="#" id='hc_add_button' data-role="button" data-icon="plus" data-mini="true">Add a set</a>
+			</div>
+		</div>
+
+		<br><br>
+
+		<div class="ui-grid-b">
+			<div class="ui-block-a"><a href="#menu" data-role="button" data-theme="b" data-mini="true" >Le Menu</a></div>
+			<div class="ui-block-b" style="width:28%;">&nbsp;</div>
+			<div class="ui-block-c" style="width:32%;" id='hc_submit'><button type="v" data-theme="a" data-mini="true" style="width:15%; padding:0px; margin-left:-10px;">Submit</button></div>
+		</div>
+
+
+	</div><!-- /content -->
+
+</form>
+</div>
+<!-- /page -->
+
+
+
+
+<!-- Start of DL page -->
+<div data-role="page" id="deadlift">
+<form id='dl_form' action='/cgi/pumpTracker.php' method=POST>
+<input type=hidden name=ex value='dl'>
+<input type=hidden name=datetime id='dl_datetime'>
+<input type=hidden name='self_weight' id="dl_sw">
+
+	<div data-role="header" data-theme="a">
+		<h1>Deadlift</h1>
+	</div><!-- /header -->
+
+	<div data-role="content">
+
+		<div class="ui-grid-solo small" style="width: 92%">
+				<input type="checkbox" name="warmup" id="checkbox-mini-0" class="custom" data-mini="true" data-theme="e" />
+				<label for="checkbox-mini-0">Warm-up</label>
+		</div>
+
+		<br>
+
+		<div class="ui-grid-a small">
+			<div class="ui-block-a"><input type=number name=set1_reps value='' style="width:85%;" placeholder="Set#1, Reps" data-mini="true" /></div>
+			<div class="ui-block-b"><input type=number name=set1_weights value='' style="width:85%;" placeholder="Set#1, Weights" data-mini="true" /></div>
+		</div>
+
+
+		<div class="ui-grid-a small">
+			<div class="ui-block-a"><input type=number name=set2_reps value='' style="width:85%;" placeholder="Set#2, Reps" data-mini="true" /></div>
+			<div class="ui-block-b"><input type=number name=set2_weights value='' style="width:85%;" placeholder="Set#2, Weights" data-mini="true" /></div>
+		</div>
+
+
+		<div class="ui-grid-a small">
+			<div class="ui-block-a"><input type=number name=set3_reps value='' style="width:85%;" placeholder="Set#3, Reps" data-mini="true" /></div>
+			<div class="ui-block-b"><input type=number name=set3_weights value='' style="width:85%;" placeholder="Set#3, Weights" data-mini="true" /></div>
+		</div>
+
+
+		<div class="ui-grid-a small">
+			<div class="ui-block-a"><input type=number name=set4_reps value='' style="width:85%;" placeholder="Set#4, Reps" data-mini="true" /></div>
+			<div class="ui-block-b"><input type=number name=set4_weights value='' style="width:85%;" placeholder="Set#4, Weights" data-mini="true" /></div>
+		</div>
+
+
+		<div class="ui-grid-a small">
+			<div class="ui-block-a"><input type=number name=set5_reps value='' style="width:85%;" placeholder="Set#5, Reps" data-mini="true" /></div>
+			<div class="ui-block-b"><input type=number name=set5_weights value='' style="width:85%;" placeholder="Set#5, Weights" data-mini="true" /></div>
+		</div>
+
+
+		<div class="ui-grid-a small hide" id='dl_set_6'>
+			<div class="ui-block-a"><input type=number name=set6_reps value='' style="width:85%;" placeholder="Set#6, Reps" data-mini="true" /></div>
+			<div class="ui-block-b"><input type=number name=set6_weights value='' style="width:85%;" placeholder="Set#6, Weights" data-mini="true" /></div>
+		</div>
+
+
+		<div class="ui-grid-a small hide" id='dl_set_7'>
+			<div class="ui-block-a"><input type=number name=set7_reps value='' style="width:85%;" placeholder="Set#7, Reps" data-mini="true" /></div>
+			<div class="ui-block-b"><input type=number name=set7_weights value='' style="width:85%;" placeholder="Set#7, Weights" data-mini="true" /></div>
+		</div>
+
+
+		<div class="ui-grid-a small hide" id='dl_set_8'>
+			<div class="ui-block-a"><input type=number name=set8_reps value='' style="width:85%;" placeholder="Set#8, Reps" data-mini="true" /></div>
+			<div class="ui-block-b"><input type=number name=set8_weights value='' style="width:85%;" placeholder="Set#8, Weights" data-mini="true" /></div>
+		</div>
+
+
+		<div class="ui-grid-solo" id='dl_add_button_div'>
+			<div class="ui-block-a">
+				<a href="#" id='dl_add_button' data-role="button" data-icon="plus" data-mini="true">Add a set</a>
+			</div>
+		</div>
+
+		<br><br>
+
+		<div class="ui-grid-b">
+			<div class="ui-block-a"><a href="#menu" data-role="button" data-theme="b" data-mini="true" >Le Menu</a></div>
+			<div class="ui-block-b" style="width:28%;">&nbsp;</div>
+			<div class="ui-block-c" style="width:32%;" id='dl_submit'><button type="v" data-theme="a" data-mini="true" style="width:15%; padding:0px; margin-left:-10px;">Submit</button></div>
+		</div>
+
+
+	</div><!-- /content -->
+
+</form>
+</div>
+<!-- /page -->
+
+
+<!-- Start of Cleans page -->
+<div data-role="page" id="cleans">
+<form id='cleans_form' action='/cgi/pumpTracker.php' method=POST>
+<input type=hidden name=ex value='cleans'>
+<input type=hidden name=datetime id='cleans_datetime'>
+<input type=hidden name='self_weight' id="cleans_sw">
+
+	<div data-role="header" data-theme="c">
+		<h1>Cleans</h1>
+	</div><!-- /header -->
+
+	<div data-role="content">
+
+		<div class="ui-grid-solo small" style="width: 92%">
+				<input type="checkbox" name="warmup" id="checkbox-mini-0" class="custom" data-mini="true" data-theme="e" />
+				<label for="checkbox-mini-0">Warm-up</label>
+		</div>
+
+
+		<br>
+
+		<div class="ui-grid-a small">
+			<div class="ui-block-a"><input type=number name=set1_reps value='' style="width:85%;" placeholder="Set#1, Reps" data-mini="true" /></div>
+			<div class="ui-block-b"><input type=number name=set1_weights value='' style="width:85%;" placeholder="Set#1, Weights" data-mini="true" /></div>
+		</div>
+
+
+		<div class="ui-grid-a small">
+			<div class="ui-block-a"><input type=number name=set2_reps value='' style="width:85%;" placeholder="Set#2, Reps" data-mini="true" /></div>
+			<div class="ui-block-b"><input type=number name=set2_weights value='' style="width:85%;" placeholder="Set#2, Weights" data-mini="true" /></div>
+		</div>
+
+
+		<div class="ui-grid-a small">
+			<div class="ui-block-a"><input type=number name=set3_reps value='' style="width:85%;" placeholder="Set#3, Reps" data-mini="true" /></div>
+			<div class="ui-block-b"><input type=number name=set3_weights value='' style="width:85%;" placeholder="Set#3, Weights" data-mini="true" /></div>
+		</div>
+
+
+		<div class="ui-grid-a small">
+			<div class="ui-block-a"><input type=number name=set4_reps value='' style="width:85%;" placeholder="Set#4, Reps" data-mini="true" /></div>
+			<div class="ui-block-b"><input type=number name=set4_weights value='' style="width:85%;" placeholder="Set#4, Weights" data-mini="true" /></div>
+		</div>
+
+
+		<div class="ui-grid-a small">
+			<div class="ui-block-a"><input type=number name=set5_reps value='' style="width:85%;" placeholder="Set#5, Reps" data-mini="true" /></div>
+			<div class="ui-block-b"><input type=number name=set5_weights value='' style="width:85%;" placeholder="Set#5, Weights" data-mini="true" /></div>
+		</div>
+
+
+		<div class="ui-grid-a small hide" id='cl_set_6'>
+			<div class="ui-block-a"><input type=number name=set6_reps value='' style="width:85%;" placeholder="Set#6, Reps" data-mini="true" /></div>
+			<div class="ui-block-b"><input type=number name=set6_weights value='' style="width:85%;" placeholder="Set#6, Weights" data-mini="true" /></div>
+		</div>
+
+
+		<div class="ui-grid-a small hide" id='cl_set_7'>
+			<div class="ui-block-a"><input type=number name=set7_reps value='' style="width:85%;" placeholder="Set#7, Reps" data-mini="true" /></div>
+			<div class="ui-block-b"><input type=number name=set7_weights value='' style="width:85%;" placeholder="Set#7, Weights" data-mini="true" /></div>
+		</div>
+
+
+		<div class="ui-grid-a small hide" id='cl_set_8'>
+			<div class="ui-block-a"><input type=number name=set8_reps value='' style="width:85%;" placeholder="Set#8, Reps" data-mini="true" /></div>
+			<div class="ui-block-b"><input type=number name=set8_weights value='' style="width:85%;" placeholder="Set#8, Weights" data-mini="true" /></div>
+		</div>
+
+
+		<div class="ui-grid-solo" id='cl_add_button_div'>
+			<div class="ui-block-a">
+				<a href="#" id='cl_add_button' data-role="button" data-icon="plus" data-mini="true">Add a set</a>
+			</div>
+		</div>
+
+		<br><br>
+
+		<div class="ui-grid-b">
+			<div class="ui-block-a"><a href="#menu" data-role="button" data-theme="b" data-mini="true" >Le Menu</a></div>
+			<div class="ui-block-b" style="width:28%;">&nbsp;</div>
+			<div class="ui-block-c" id='cleans_submit' style="width:32%;"><button type="v" data-theme="a" data-mini="true" style="width:15%; padding:0px; margin-left:-10px;">Submit</button></div>
+		</div>
+
+
+	</div><!-- /content -->
+
+</form>
+</div>
+<!-- /page -->
+
+
+
+
+
+
+
+
+<!-- Start of Jogging page -->
+<div data-role="page" id="jogging">
+<form id='jogg_form' action='/cgi/pumpTracker.php' method=POST>
+<input type=hidden name=ex value='jogg'>
+<input type=hidden name=datetime id='jogg_datetime'>
+<input type=hidden name='self_weight' id="jogg_sw">
+
+	<div data-role="header" data-theme="e">
+		<h1>Jogging</h1>
+	</div><!-- /header -->
+
+	<div data-role="content" style="text-align:center;">
+
+		<br>
+
+		<fieldset data-role="controlgroup" data-mini="false" data-type="horizontal">
+
+			<input type="radio" name="radio-mini" id="radio-mini-1" value="45" checked="checked" />
+			<label for="radio-mini-1">45m</label>
+
+			<input type="radio" name="radio-mini" id="radio-mini-2" value="50"  />
+			<label for="radio-mini-2">50m</label>
+			
+			<input type="radio" name="radio-mini" id="radio-mini-3" value="55"  />
+			<label for="radio-mini-3">55m</label>
+
+		</fieldset>
+
+		<br><br>
+
+		<div class="ui-grid-a">
+			<div class="ui-block-a"><a href="#menu" data-role="button" data-theme="b" data-mini="true" >Le Menu</a></div>
+			
+			<div class="ui-block-b" id='jogg_submit'><button type="v" data-theme="a" data-mini="true" style="width:15%; padding:0px; margin-left:-10px;">Submit</button></div>
+		
+		</div>
+	</div><!-- /content -->
+
+</form>
+</div>
+<!-- /page -->
+
+
+
+
+
+<!-- Start of History page -->
+<div data-role="page" id="history">
+
+	<div data-role="header" data-theme="e">
+		<h1>History</h1>
+	</div><!-- /header -->
+
+	<div data-role="content" style="text-align:center;">
+
+		<br>
+
+		<fieldset data-role="controlgroup" data-mini="false" data-type="horizontal">
+
+			<input type="radio" name="radio-mini" id="radio-mini-1" value="45" checked="checked" />
+			<label for="radio-mini-1">45m</label>
+
+			<input type="radio" name="radio-mini" id="radio-mini-2" value="50"  />
+			<label for="radio-mini-2">50m</label>
+			
+			<input type="radio" name="radio-mini" id="radio-mini-3" value="55"  />
+			<label for="radio-mini-3">55m</label>
+
+		</fieldset>
+
+		<br><br>
+
+		<div class="ui-grid-a">
+			<div class="ui-block-a"><a href="#menu" data-role="button" data-theme="b" data-mini="true" >Le Menu</a></div>
+			
+			<div class="ui-block-b" id='jogg_submit'><button type="v" data-theme="a" data-mini="true" style="width:15%; padding:0px; margin-left:-10px;">Submit</button></div>
+		
+		</div>
+	</div><!-- /content -->
+
+</form>
+</div>
+<!-- /page -->
+
+
+</body>
