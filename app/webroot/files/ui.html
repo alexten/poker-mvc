@@ -41,7 +41,7 @@
 
 		<div class="ui-grid-b">
 			<div class="ui-block-a"></div>
-			<div class="ui-block-b"><input type="datetime" id='datetime' placeholder='Date' style='width: 15em;'></div>
+			<div class="ui-block-b"><input type="date" data-clear-btn="true" name="date-2" id="date-2" value=""></div>
 			<div class="ui-block-c"></div>
 		</div>
 
@@ -53,19 +53,19 @@
 
 		        <div class="ui-grid-a">
 				    <div class="ui-block-a"><div class="ui-bar ui-bar-d" style="height:60px"><div data-role="rangeslider" data-track-theme="d" data-theme="a" data-mini="true">
-			        <label for="range-3a">Small/Big Blinds:</label>
+			        <label for="cash_small_blind">Small/Big Blinds:</label>
 			        <input type="range" name="cash_small_blind" id="cash_small_blind" min="0.25" max="5" step=".25" value="0.25">
 			        <input type="range" name="cash_big_blind" id="cash_big_blind" min="0.50" max="5" step=".25" value="0.50">
 			    </div></div></div>
-				    <div class="ui-block-b"><div class="ui-bar ui-bar-d" style="height:60px"><label for="max-buy-in">Max Buy-In:</label>
+				    <div class="ui-block-b"><div class="ui-bar ui-bar-d" style="height:60px"><label for="cash_max_buy_in">Max Buy-In:</label>
 					<input type="range" name="cash_max_buy_in" id="cash_max_buy_in" step="5" value="20" min="20" max="1000" data-mini="true" data-highlight="true" data-theme="b" data-track-theme="d"></div></div>
 				</div>
 
 		        
 		        <div class="ui-grid-a">
-				    <div class="ui-block-a"><div class="ui-bar ui-bar-c" style="height:60px"><label for="buy-in">Initial Buy-In:</label>
+				    <div class="ui-block-a"><div class="ui-bar ui-bar-c" style="height:60px"><label for="cash_buy_in">Initial Buy-In:</label>
 					<input type="range" name="cash_buy_in" id="cash_buy_in" value="20" min="20" max="1000" data-mini="true" data-highlight="true" data-theme="b" data-track-theme="d"></div></div>
-				    <div class="ui-block-b"><div class="ui-bar ui-bar-c" style="height:60px"><label for="rebuys">Rebuys:</label>
+				    <div class="ui-block-b"><div class="ui-bar ui-bar-c" style="height:60px"><label for="cash_rebuys">Rebuys:</label>
 					<input type="range" name="cash_rebuys" id="cash_rebuys" value="20" min="20" max="1000" data-mini="true" data-highlight="true" data-theme="b" data-track-theme="d"></div></div>
 				</div>
 
@@ -101,12 +101,57 @@
 				    <div class="ui-block-b"><div class="ui-bar ui-bar-d" style="height:60px"><a href="#" data-role="button" data-icon="gear" data-theme="c">SNG</a></div></div>
 				</div>
 
+
+		        <div class="ui-grid-a">
+				    <div class="ui-block-a"><div class="ui-bar ui-bar-c" style="height:60px"><label for="tourney_buy_in">Buy-In:</label>
+					<input type="range" name="tourney_buy_in" id="tourney_buy_in" value="20" min="20" max="1000" data-mini="true" data-highlight="true" data-theme="b" data-track-theme="d"></div></div>
+				    <div class="ui-block-b"><div class="ui-bar ui-bar-c" style="height:60px"><label for="tourney_rebuys_addons">Rebuys/Addons:</label>
+					<input type="range" name="tourney_rebuys_addons" id="tourney_rebuys_addons" value="20" min="20" max="1000" data-mini="true" data-highlight="true" data-theme="b" data-track-theme="d"></div></div>
+				</div>
+
+
+		        <div class="ui-grid-a">
+				    <div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px"><label for="tourney_number_of_players">Number of Players:</label>
+					<input type="range" name="tourney_number_of_players" id="tourney_number_of_players" value="9" min="2" max="1000" data-mini="true" data-highlight="true" data-theme="b" data-track-theme="d"></div></div>
+				    <div class="ui-block-b"><div class="ui-bar ui-bar-d" style="height:60px"><label for="cash_results">Initial Stack (in BB):</label>
+					<input type="range" name="cash_results" id="cash_results" value="20" min="10" max="1000" data-mini="true" data-highlight="true" data-theme="b" data-track-theme="d"></div></div>
+				</div>		
+
+
+		        <div class="ui-grid-a">
+				    <div class="ui-block-a"><div class="ui-bar ui-bar-c" style="height:60px"><label for="tourney_location">Location:</label>
+					<input type="text" data-mini="true" name="tourney_location" id="tourney_location" value=""></div></div>
+				    <div class="ui-block-b"><div class="ui-bar ui-bar-c" style="height:60px"><label for="tourney_rake">Rake %:</label>
+					<input type="range" name="tourney_rake" id="tourney_rake" value="30" min="0" max="100" data-mini="true" data-highlight="true" data-theme="b" data-track-theme="d"></div></div>
+				</div>
+
+
+		        <div class="ui-grid-a">
+				    <div class="ui-block-a"><div class="ui-bar ui-bar-d" style="height:60px"><label for="tourney_place">Resulting Place:</label>
+					<input type="range" name="tourney_place" id="tourney_place" value="1" min="1" max="1000" data-mini="true" data-highlight="true" data-theme="b" data-track-theme="d"></div></div>
+				    <div class="ui-block-b"><div class="ui-bar ui-bar-e" style="height:60px"><label for="tourney_results">Cash Out:</label>
+					<input type="range" name="tourney_results" id="tourney_results" value="0" min="0" max="10000" data-mini="true" data-highlight="true" data-theme="b" data-track-theme="d"></div></div>
+				</div>		
+
+				<br>
+				<div class="ui-grid-b">
+				    <div class="ui-block-a"></div>
+				    <div class="ui-block-b"><a href="#" data-role="button" data-mini="true" data-inline="true" data-icon="edit" data-theme="e">Submit Results</a></div>
+				    <div class="ui-block-c"></div>
+				</div><!-- /grid-b -->
+
 		    </div>
 
 
 
-		    <div data-role="collapsible" data-theme="b"  data-collapsed-icon="arrow-r">
+		    <div data-role="collapsible" data-theme="c"  data-collapsed-icon="arrow-r">
 		        <h3>Result Analysis</h3>
+		        <p>I'm the collapsible content for section 3</p>
+		    </div>
+
+
+		    <div data-role="collapsible" data-theme="b" data-collapsed-icon="arrow-r">
+		        <h3>Raw History</h3>
 		        <p>I'm the collapsible content for section 3</p>
 		    </div>
 		</div>
