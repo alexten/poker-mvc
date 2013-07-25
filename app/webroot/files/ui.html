@@ -47,48 +47,64 @@
 
 		<br>
 
-		<div data-role="collapsible-set" data-content-theme="d" data-collapsed-icon="arrow-d" data-expanded-icon="delete">
+		<div data-role="collapsible-set" data-content-theme="d" data-collapsed-icon="arrow-d" data-expanded-icon="arrow-u">
 		    <div data-role="collapsible" data-theme="e">
 		        <h3>Cash Games</h3>
-		        <p></p>
 
 		        <div class="ui-grid-a">
 				    <div class="ui-block-a"><div class="ui-bar ui-bar-d" style="height:60px"><div data-role="rangeslider" data-track-theme="d" data-theme="a" data-mini="true">
 			        <label for="range-3a">Small/Big Blinds:</label>
-			        <input type="range" name="range-3a" id="range-3a" min="0.25" max="5" step=".25" value="0.25">
-			        <input type="range" name="range-3b" id="range-3b" min="0.50" max="5" step=".25" value="0.50">
+			        <input type="range" name="cash_small_blind" id="cash_small_blind" min="0.25" max="5" step=".25" value="0.25">
+			        <input type="range" name="cash_big_blind" id="cash_big_blind" min="0.50" max="5" step=".25" value="0.50">
 			    </div></div></div>
 				    <div class="ui-block-b"><div class="ui-bar ui-bar-d" style="height:60px"><label for="max-buy-in">Max Buy-In:</label>
-					<input type="range" name="max-buy-in" id="max-buy-in" step="5" value="20" min="20" max="1000" data-mini="true" data-highlight="true" data-theme="b" data-track-theme="d"></div></div>
+					<input type="range" name="cash_max_buy_in" id="cash_max_buy_in" step="5" value="20" min="20" max="1000" data-mini="true" data-highlight="true" data-theme="b" data-track-theme="d"></div></div>
 				</div>
 
 		        
 		        <div class="ui-grid-a">
 				    <div class="ui-block-a"><div class="ui-bar ui-bar-c" style="height:60px"><label for="buy-in">Initial Buy-In:</label>
-					<input type="range" name="buy-in" id="buy-in" value="20" min="20" max="1000" data-mini="true" data-highlight="true" data-theme="b" data-track-theme="d"></div></div>
+					<input type="range" name="cash_buy_in" id="cash_buy_in" value="20" min="20" max="1000" data-mini="true" data-highlight="true" data-theme="b" data-track-theme="d"></div></div>
 				    <div class="ui-block-b"><div class="ui-bar ui-bar-c" style="height:60px"><label for="rebuys">Rebuys:</label>
-					<input type="range" name="rebuys" id="rebuys" value="20" min="20" max="1000" data-mini="true" data-highlight="true" data-theme="b" data-track-theme="d"></div></div>
+					<input type="range" name="cash_rebuys" id="cash_rebuys" value="20" min="20" max="1000" data-mini="true" data-highlight="true" data-theme="b" data-track-theme="d"></div></div>
 				</div>
 
 
 
 		        <div class="ui-grid-a">
-				    <div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px"><label for="buy-in">Number of Players:</label>
-					<input type="range" name="number_of_players" id="number_of_players" value="9" min="2" max="10" data-mini="true" data-highlight="true" data-theme="b" data-track-theme="d"></div></div>
-				    <div class="ui-block-b"><div class="ui-bar ui-bar-e" style="height:60px"><label for="buy-in">Cash Out:</label>
-					<input type="range" name="results" id="results" value="0" min="0" max="1000" data-mini="true" data-highlight="true" data-theme="b" data-track-theme="d"></div></div>
+				    <div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px"><label for="cash_number_of_players">Number of Players:</label>
+					<input type="range" name="cash_number_of_players" id="cash_number_of_players" value="9" min="2" max="10" data-mini="true" data-highlight="true" data-theme="b" data-track-theme="d"></div></div>
+				    <div class="ui-block-b"><div class="ui-bar ui-bar-e" style="height:60px"><label for="cash_results">Cash Out:</label>
+					<input type="range" name="cash_results" id="cash_results" value="0" min="0" max="1000" data-mini="true" data-highlight="true" data-theme="b" data-track-theme="d"></div></div>
 				</div>			    
 
 
-			    
+				<br>
+				<div class="ui-grid-b">
+				    <div class="ui-block-a"></div>
+				    <div class="ui-block-b"><a href="#" data-role="button" data-mini="true" data-inline="true" data-icon="edit" data-theme="e">Submit Results</a></div>
+				    <div class="ui-block-c"></div>
+				</div><!-- /grid-b -->
 
 			    
 
 		    </div>
+
+
+
 		    <div data-role="collapsible" data-theme="a">
 		        <h3>Tourneys</h3>
-		        <p>I'm the collapsible content for section 2</p>
+
+
+		        <div class="ui-grid-a">
+				    <div class="ui-block-a"><div class="ui-bar ui-bar-d" style="height:60px"><a href="#" data-role="button" data-icon="grid" data-theme="b">Multi Table</a></div></div>
+				    <div class="ui-block-b"><div class="ui-bar ui-bar-d" style="height:60px"><a href="#" data-role="button" data-icon="gear" data-theme="c">SNG</a></div></div>
+				</div>
+
 		    </div>
+
+
+
 		    <div data-role="collapsible" data-theme="b"  data-collapsed-icon="arrow-r">
 		        <h3>Result Analysis</h3>
 		        <p>I'm the collapsible content for section 3</p>
